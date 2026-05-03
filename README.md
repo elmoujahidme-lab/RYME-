@@ -122,7 +122,7 @@
 <div class="music-player">
     <button class="btn" onclick="toggleMusic()"><i class="fas fa-music"></i> Play Music</button>
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -146,7 +146,7 @@
         <div id="level2" class="level">
             <i class="fas fa-heart heart-icon"></i>
             <h1>The "Ego Bug" Fix</h1>
-            <p>I realized my code was wrong. I was looking at the <b>process</b> instead of your happiness.</p>
+            <p>I realized my code was wrong. I was looking at the process instead of your happiness.</p>
             <p>You weren't "acting", you were <b>shining</b>. I should have been your biggest fan.</p>
             <button class="btn" onclick="nextLevel(3)">Merge Changes?</button>
         </div>
@@ -156,16 +156,26 @@
             <h1>Security Protocol</h1>
             <p>I promise to never make you hide your feelings. Your tears are a 'System Crash' I can't afford.</p>
             <p>Update to <b>v2.0</b>: More trust, less comparison.</p>
-            <button class="btn" onclick="nextLevel(4)">Accept Update?</button>
+            <button class="btn" onclick="nextLevel(4)">Update System</button>
         </div>
 
         <div id="level4" class="level">
-            <i class="fas fa-kiss-wink-heart heart-icon"></i>
-            <h1>Final Question:</h1>
-            <h1>Do you forgive me?</h1>
+            <i class="fas fa-question-circle heart-icon" style="color: var(--secondary);"></i>
+            <h1>Verification Required</h1>
+            <h1>Do you still love me?</h1>
             <div style="display: flex; justify-content: center; gap: 20px;">
-                <button class="btn" onclick="finalCelebrate()">YES!</button>
-                <button id="run-btn" class="btn" onmouseover="moveButton()">NO</button>
+                <button class="btn" onclick="nextLevel(5)">Yes, I do</button>
+                <button id="run-btn-1" class="btn" onmouseover="moveButton('run-btn-1')">No</button>
+            </div>
+        </div>
+
+        <div id="level5" class="level">
+            <i class="fas fa-kiss-wink-heart heart-icon"></i>
+            <h1>Final Confirmation</h1>
+            <h1>So... do you forgive me?</h1>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn" onclick="finalCelebrate()">I Forgive You</button>
+                <button id="run-btn-2" class="btn" onmouseover="moveButton('run-btn-2')">Still Mad</button>
             </div>
         </div>
 
@@ -179,17 +189,16 @@
 <script>
     function nextLevel(lvl) {
         const music = document.getElementById('bgMusic');
-        // تشغيل الموسيقى عند أول تفاعل
         if (music.paused) {
             music.play().catch(e => console.log("Audio deferred"));
         }
-
         document.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
         document.getElementById('level' + lvl).classList.add('active');
     }
 
-    function moveButton() {
-        const btn = document.getElementById('run-btn');
+    // تعديل الدالة لتعمل مع أي زر
+    function moveButton(id) {
+        const btn = document.getElementById(id);
         const x = Math.random() * (window.innerWidth - btn.clientWidth - 100);
         const y = Math.random() * (window.innerHeight - btn.clientHeight - 100);
         btn.style.position = 'fixed';
@@ -199,18 +208,18 @@
 
     function finalCelebrate() {
         confetti({
-            particleCount: 150,
-            spread: 70,
+            particleCount: 200,
+            spread: 80,
             origin: { y: 0.6 },
             colors: ['#ff4d6d', '#00f2ff', '#ffffff']
         });
         
         const terminal = document.querySelector('.terminal-body');
         terminal.innerHTML = `
-            <h1 style="color: #27c93f;">SUCCESS!</h1>
-            <p>Deployment Complete. Our connection is now encrypted with <b>EternalLove-256</b>.</p>
-            <p>I love you, Ryme. Ready for our next sprint together.</p>
-            <i class="fas fa-check-circle" style="font-size: 4rem; color: #27c93f;"></i>
+            <h1 style="color: #27c93f;">SYSTEM STABILIZED</h1>
+            <p>Connection fully restored. Love.exe is running perfectly.</p>
+            <p>I love you more than words (and code) can say, Ryme.</p>
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: #27c93f; margin-top: 15px;"></i>
         `;
     }
 
