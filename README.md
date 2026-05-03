@@ -24,7 +24,6 @@
             align-items: center;
         }
 
-        /* مأثرات الخلفية التقنية */
         .grid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -45,8 +44,7 @@
             padding: 10px;
             border-radius: 10px 10px 0 0;
             border: 1px solid #333;
-            display: flex;
-            gap: 8px;
+            display: flex; gap: 8px;
         }
 
         .dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -99,7 +97,6 @@
             100% { transform: scale(1); }
         }
 
-        /* مستويات اللعبة */
         .level { display: none; }
         .level.active { display: block; animation: fadeIn 0.8s; }
 
@@ -108,7 +105,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* مشغل الموسيقى */
         .music-player {
             position: fixed;
             bottom: 20px;
@@ -116,7 +112,6 @@
             z-index: 100;
         }
 
-        /* زر "لا" الهارب - حركة مرحة */
         #run-btn { position: relative; }
     </style>
 </head>
@@ -125,9 +120,9 @@
 <div class="grid-bg"></div>
 
 <div class="music-player">
-    <button class="btn" onclick="toggleMusic()"><i class="fas fa-music"></i> Play Our Theme</button>
-    <audio id="bgMusic" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    <button class="btn" onclick="toggleMusic()"><i class="fas fa-music"></i> Play Music</button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 </div>
 
@@ -151,26 +146,26 @@
         <div id="level2" class="level">
             <i class="fas fa-heart heart-icon"></i>
             <h1>The "Ego Bug" Fix</h1>
-            <p>I realized my code was wrong. I was looking at the <b>process</b> (silence vs activity) instead of the <b>output</b> (your happiness).</p>
-            <p>You weren't "acting", you were <b>shining</b>. And I should have been your biggest fan, not your critic.</p>
+            <p>I realized my code was wrong. I was looking at the <b>process</b> instead of your happiness.</p>
+            <p>You weren't "acting", you were <b>shining</b>. I should have been your biggest fan.</p>
             <button class="btn" onclick="nextLevel(3)">Merge Changes?</button>
         </div>
 
         <div id="level3" class="level">
             <i class="fas fa-shield-alt heart-icon" style="color: #FFD700;"></i>
             <h1>Security Protocol</h1>
-            <p>I promise to never make you feel like you have to hide your feelings. Your tears are the most expensive 'System Crash' I can ever have.</p>
-            <p>Let's update our relationship to <b>v2.0</b>: More trust, less comparison.</p>
+            <p>I promise to never make you hide your feelings. Your tears are a 'System Crash' I can't afford.</p>
+            <p>Update to <b>v2.0</b>: More trust, less comparison.</p>
             <button class="btn" onclick="nextLevel(4)">Accept Update?</button>
         </div>
 
         <div id="level4" class="level">
             <i class="fas fa-kiss-wink-heart heart-icon"></i>
-            <h1>One question remains?</h1>
-            <h1>Do I love you?</h1>
+            <h1>Final Question:</h1>
+            <h1>Do you forgive me?</h1>
             <div style="display: flex; justify-content: center; gap: 20px;">
-                <button class="btn" onclick="finalCelebrate()">NOO!</button>
-                <button id="run-btn" class="btn" onmouseover="moveButton()">yes</button>
+                <button class="btn" onclick="finalCelebrate()">YES!</button>
+                <button id="run-btn" class="btn" onmouseover="moveButton()">NO</button>
             </div>
         </div>
 
@@ -180,20 +175,19 @@
         -- Local Host: Your Favorite Engineer Amine --
     </p>
 </div>
+
 <script>
-    // هذه الدالة ستقوم بتشغيل الصوت فور ضغطها على أول زر
     function nextLevel(lvl) {
-        // تشغيل الموسيقى عند الضغط على زر البداية (Level 1 -> Level 2)
         const music = document.getElementById('bgMusic');
+        // تشغيل الموسيقى عند أول تفاعل
         if (music.paused) {
-            music.play().catch(e => console.log("Audio play deferred"));
+            music.play().catch(e => console.log("Audio deferred"));
         }
 
         document.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
         document.getElementById('level' + lvl).classList.add('active');
     }
 
-    // حركة زر "No" الهارب
     function moveButton() {
         const btn = document.getElementById('run-btn');
         const x = Math.random() * (window.innerWidth - btn.clientWidth - 100);
@@ -203,7 +197,6 @@
         btn.style.top = y + 'px';
     }
 
-    // الاحتفال النهائي عند الضغط على Yes
     function finalCelebrate() {
         confetti({
             particleCount: 150,
@@ -216,21 +209,19 @@
         terminal.innerHTML = `
             <h1 style="color: #27c93f;">SUCCESS!</h1>
             <p>Deployment Complete. Our connection is now encrypted with <b>EternalLove-256</b>.</p>
-            <p>I love you, and I'm sorry for being a 'Silly User'.</p>
+            <p>I love you, Ryme. Ready for our next sprint together.</p>
             <i class="fas fa-check-circle" style="font-size: 4rem; color: #27c93f;"></i>
         `;
     }
 
-    // تشغيل/إيقاف الموسيقى يدوياً
     function toggleMusic() {
         const music = document.getElementById('bgMusic');
-        const btn = document.querySelector('.music-player .btn');
         if (music.paused) {
             music.play();
-            btn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
         } else {
             music.pause();
-            btn.innerHTML = '<i class="fas fa-music"></i> Play Our Theme';
         }
     }
 </script>
+</body>
+</html>
