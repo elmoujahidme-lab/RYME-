@@ -180,15 +180,20 @@
         -- Local Host: Your Favorite Engineer Amine --
     </p>
 </div>
-
 <script>
-    // التنقل بين المستويات
+    // هذه الدالة ستقوم بتشغيل الصوت فور ضغطها على أول زر
     function nextLevel(lvl) {
+        // تشغيل الموسيقى عند الضغط على زر البداية (Level 1 -> Level 2)
+        const music = document.getElementById('bgMusic');
+        if (music.paused) {
+            music.play().catch(e => console.log("Audio play deferred"));
+        }
+
         document.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
         document.getElementById('level' + lvl).classList.add('active');
     }
 
-    // حركة زر "No" الهارب (المزحة)
+    // حركة زر "No" الهارب
     function moveButton() {
         const btn = document.getElementById('run-btn');
         const x = Math.random() * (window.innerWidth - btn.clientWidth - 100);
@@ -198,7 +203,7 @@
         btn.style.top = y + 'px';
     }
 
-    // الاحتفال النهائي
+    // الاحتفال النهائي عند الضغط على Yes
     function finalCelebrate() {
         confetti({
             particleCount: 150,
@@ -210,22 +215,22 @@
         const terminal = document.querySelector('.terminal-body');
         terminal.innerHTML = `
             <h1 style="color: #27c93f;">SUCCESS!</h1>
-            <p>I loved your honesty</b>.</p>
+            <p>Deployment Complete. Our connection is now encrypted with <b>EternalLove-256</b>.</p>
             <p>I love you, and I'm sorry for being a 'Silly User'.</p>
             <i class="fas fa-check-circle" style="font-size: 4rem; color: #27c93f;"></i>
         `;
     }
 
-    // تشغيل الموسيقى
+    // تشغيل/إيقاف الموسيقى يدوياً
     function toggleMusic() {
         const music = document.getElementById('bgMusic');
+        const btn = document.querySelector('.music-player .btn');
         if (music.paused) {
             music.play();
+            btn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
         } else {
             music.pause();
+            btn.innerHTML = '<i class="fas fa-music"></i> Play Our Theme';
         }
     }
 </script>
-
-</body>
-</html>
